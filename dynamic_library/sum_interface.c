@@ -24,7 +24,7 @@ pid_t create_forks(const size_t size, size_t number_of_forks, size_t* begin, siz
     const size_t step = size / number_of_forks;
     *begin = 0;
     *end = step;
-    pid_t pid;
+    pid_t pid = 0;
     for (int i = 0; i < number_of_forks; ++i) {
         pid = fork();
         if (pid == 0)

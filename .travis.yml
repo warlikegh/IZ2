@@ -9,8 +9,6 @@ os:
   - osx
 
 compiler:
-  # ... и с помощью GCC, и Clang
-  - gcc
   - clang
 
 addons:
@@ -32,9 +30,6 @@ env:
 matrix:
   exclude:
     # вручную исключим ненужные элементы из матрицы сборки:
-    - os: osx
-      compiler: gcc
-
     - os: osx
       env: TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
 
