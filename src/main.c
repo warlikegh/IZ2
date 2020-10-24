@@ -44,13 +44,23 @@ int main(int argc, char *argv[]) {
         return print_error(code);
     size_t size = atoi(argv[1]);
     int* array = get_array(size);
-    long long even, odd;
-    code = set_sum(array, size, &even, &odd);
+    long long even_static, odd_static, even_dynamic, odd_dynamic;
+    code = find_sum_static(array, size, &even_static, &odd_static);
     if (code != SUCCESS) {
         free_array(array);
         return print_error(code);
     }
-    printf("even_sum = %lld\nodd_sum = %lld\n", even, odd);
+    printf("static: \teven_sum = %lld\todd_sum = %lld\n", even_static, odd_static);
+    code = find_sum_dynamic(array, size, &even_dynamic, &odd_dynamic);
+    if (code != SUCCESS) {
+        free_array(array);
+        return print_error(code);
+    }
+    printf("dynamic:\teven_sum = %lld\todd_sum = %lld\n", even_dynamic, odd_dynamic);
+    if (even_dynamic == even_static && odd_dynamic == odd_static)
+        puts("Results are equal.");
+    else
+        puts("Results are not equal.");
     free_array(array);
     return 0;
 }

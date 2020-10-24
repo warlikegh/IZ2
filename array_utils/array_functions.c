@@ -29,6 +29,8 @@ int* get_array_from_file(char* filename, size_t* size) {
     if (!file)
         return NULL;
     int* array = calloc(*size, sizeof(int));
+    if (!array)
+        return NULL;
     int i = 0;
     while (!feof(file)) {
         if (fscanf(file, "%d", &array[i]) == 1) {
@@ -41,12 +43,4 @@ int* get_array_from_file(char* filename, size_t* size) {
 
 void free_array(int* array) {
     free(array);
-}
-
-void write_to_file(const char* filename, long long even, long long odd) {
-    FILE* file = fopen(filename, "a+");
-    if (!file)
-        return;
-    fprintf(file, "%lld %lld ", even, odd);
-    fclose(file);
 }

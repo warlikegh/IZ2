@@ -4,20 +4,20 @@ enable_language(C CXX)
 set(CMAKE_C_FLAGS "-std=c11 -Wall -Werror -Wpedantic")
 set(CMAKE_C_STANDARD 99)
 
-set(SRC_MAIN ${PROJECT_SOURCE_DIR}/src/main.c ${PROJECT_SOURCE_DIR}/array_utils/array_functions.c)
-set(SRC_FILES_STATIC ${PROJECT_SOURCE_DIR}/static_library/sum_interface.c)
-set(SRC_FILES_DYNAMIC ${PROJECT_SOURCE_DIR}/dynamic_library/sum_interface.c)
+set(SRC_MAIN ${PROJECT_SOURCE_DIR}/src/main.c)
+set(SRC_FILES_STATIC ${PROJECT_SOURCE_DIR}/static_library/sum_interface.c
+        ${PROJECT_SOURCE_DIR}/array_utils/array_functions.c)
+set(SRC_FILES_DYNAMIC ${PROJECT_SOURCE_DIR}/dynamic_library/sum_interface.c
+        ${PROJECT_SOURCE_DIR}/array_utils/array_functions.c)
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
 
 add_library(static STATIC ${SRC_FILES_STATIC})
 add_library(dynamic SHARED ${SRC_FILES_DYNAMIC})
 
-add_executable(IZ2_single ${SRC_MAIN})
-add_executable(IZ2_multi ${SRC_MAIN})
+add_executable(IZ2 ${SRC_MAIN})
 
-target_link_libraries(IZ2_single static)
-target_link_libraries(IZ2_multi dynamic)
+target_link_libraries(IZ2 static dynamic)
 
 configure_file(CMakeLists.txt.in
         googletest-download/CMakeLists.txt)

@@ -9,14 +9,16 @@
 #define ERROR_FORK -2
 #define ERROR_UNMAP -3
 
-int set_sum(const int* array, size_t size, long long* even_sum, long long* odd_sum);
+// static_library
+int find_sum_static(const int* array, size_t size, long long* even_sum, long long* odd_sum);
+
+// dynamic_library
+int find_sum_dynamic(const int* array, size_t size, long long* even_sum, long long* odd_sum);
 
 // array functions
 int* get_array(size_t size);
 
 int* get_array_from_file(char* filename, size_t* size);
-
-void write_to_file(const char* filename, long long even, long long odd);
 
 void free_array(int* array);
 

@@ -38,7 +38,7 @@ pid_t create_forks(const size_t size, size_t number_of_forks, size_t* begin, siz
     return pid;
 }
 
-int set_sum(const int* array, size_t size, long long* even_sum, long long* odd_sum) {
+int find_sum_dynamic(const int* array, size_t size, long long* even_sum, long long* odd_sum) {
     long long* shared_odd = mmap(NULL, sizeof(long long), PROT_READ | PROT_WRITE,
                                  MAP_SHARED | MAP_ANONYMOUS, -1, 0);
     long long* shared_even = mmap(NULL, sizeof(long long), PROT_READ | PROT_WRITE,
