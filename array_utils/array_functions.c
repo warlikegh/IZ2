@@ -29,8 +29,10 @@ int* get_array_from_file(char* filename, size_t* size) {
     if (!file)
         return NULL;
     int* array = calloc(*size, sizeof(int));
-    if (!array)
+    if (!array) {
+        fclose(file);
         return NULL;
+    }
     int i = 0;
     while (!feof(file)) {
         if (fscanf(file, "%d", &array[i]) == 1) {
