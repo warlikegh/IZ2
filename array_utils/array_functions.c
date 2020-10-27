@@ -3,12 +3,14 @@
 
 int* get_array(size_t size) {
     int* array = calloc(size, sizeof(int));
+    if (!array)
+        return NULL;
     for (int i = 0; i < size; i++)
         array[i] = i % 100;
     return array;
 }
 
-size_t get_size_from_file(char* filename) {
+static size_t get_size_from_file(char* filename) {
     size_t size = 0;
     int temp;
     FILE* file = fopen(filename, "rb");
@@ -24,6 +26,8 @@ size_t get_size_from_file(char* filename) {
 }
 
 int* get_array_from_file(char* filename, size_t* size) {
+    if (!filename || !size)
+        return NULL;
     *size = get_size_from_file(filename);
     FILE* file = fopen(filename, "rb");
     if (!file)
@@ -44,5 +48,7 @@ int* get_array_from_file(char* filename, size_t* size) {
 }
 
 void free_array(int* array) {
+    if (!array)
+        return;
     free(array);
 }

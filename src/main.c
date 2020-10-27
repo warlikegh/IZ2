@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../include/sum_interface.h"
 
-int validate_arguments(int argc, char *argv[]) {
+static int validate_arguments(int argc, char *argv[]) {
     if (argc != 2) {
         printf("There must be two arguments, but got %d.\n", argc);
         return ERROR;
@@ -18,7 +18,7 @@ int validate_arguments(int argc, char *argv[]) {
     return SUCCESS;
 }
 
-int print_error(int code) {
+static int print_error(int code) {
     switch (code) {
         case ERROR:
             puts("Not valid arguments.");

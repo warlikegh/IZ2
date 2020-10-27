@@ -4,7 +4,9 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-long long sum_of_odd(const int *array, size_t size) {
+static long long sum_of_odd(const int *array, size_t size) {
+    if (!array)
+        return 0;
     long long odd_sum = 0;
     for (size_t i = 0; i < size; i++)
         if (array[i] % 2 != 0)
@@ -12,7 +14,9 @@ long long sum_of_odd(const int *array, size_t size) {
     return odd_sum;
 }
 
-long long sum_of_even(const int *array, size_t size) {
+static long long sum_of_even(const int *array, size_t size) {
+    if (!array)
+        return 0;
     long long even_sum = 0;
     for (size_t i = 0; i < size; i++)
         if (array[i] % 2 == 0)
@@ -20,7 +24,7 @@ long long sum_of_even(const int *array, size_t size) {
     return even_sum;
 }
 
-pid_t create_forks(const size_t size, size_t number_of_forks, size_t* begin, size_t* end) {
+static pid_t create_forks(const size_t size, size_t number_of_forks, size_t* begin, size_t* end) {
     const size_t step = size / number_of_forks;
     *begin = 0;
     *end = step;
@@ -39,6 +43,8 @@ pid_t create_forks(const size_t size, size_t number_of_forks, size_t* begin, siz
 }
 
 int find_sum_dynamic(const int* array, size_t size, long long* even_sum, long long* odd_sum) {
+    if (!array || !even_sum || !odd_sum)
+        return 0;
     long long* shared_odd = mmap(NULL, sizeof(long long), PROT_READ | PROT_WRITE,
                                  MAP_SHARED | MAP_ANONYMOUS, -1, 0);
     long long* shared_even = mmap(NULL, sizeof(long long), PROT_READ | PROT_WRITE,

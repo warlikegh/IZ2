@@ -12,12 +12,12 @@ set(SRC_FILES_DYNAMIC ${PROJECT_SOURCE_DIR}/dynamic_library/sum_interface.c
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
 
-add_library(static STATIC ${SRC_FILES_STATIC})
-add_library(dynamic SHARED ${SRC_FILES_DYNAMIC})
+add_library(sum_static STATIC ${SRC_FILES_STATIC})
+add_library(sum_dynamic SHARED ${SRC_FILES_DYNAMIC})
 
 add_executable(IZ2 ${SRC_MAIN})
 
-target_link_libraries(IZ2 static dynamic)
+target_link_libraries(IZ2 sum_static sum_dynamic)
 
 configure_file(CMakeLists.txt.in
         googletest-download/CMakeLists.txt)
